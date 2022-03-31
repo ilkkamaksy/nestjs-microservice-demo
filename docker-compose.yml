@@ -1,0 +1,73 @@
+version: "3.7"
+
+services:
+  dba:
+    container_name: dba
+    image: postgres:${POSTGRES_VERSION}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB_A}
+    ports:
+      - 5432:5432
+    volumes:
+      - /data/dba/
+  dbb:
+    container_name: dbb
+    image: postgres:${POSTGRES_VERSION}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB_B}
+    expose:
+      - "5433"
+    ports:
+      - 5433:5432
+    volumes:
+      - /data/dbb/
+    command: -p 5433
+  service-a:
+    container_name: service-a
+    image: service-a:latest
+    depends_on:
+      - dba
+    build:
+      context: ./service-a
+      target: development
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+      - 9000:9229
+    volumes:
+      - ./service-a:/service-a
+      - /service-a/node_modules
+    restart: unless-stopped
+  service-b:
+    container_name: service-b
+    image: service-b:latest
+    depends_on:
+      - dbb
+    build:
+      context: ./service-b
+      target: development
+      dockerfile: Dockerfile
+    ports:
+      - 3002:3002
+      - 9002:9229
+    volumes:
+      - ./service-b:/service-b
+      - /service-b/node_modules
+    restart: unless-stopped
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+      target: development
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+      - 9001:9229
+    volumes:
+      - ./gateway:/gateway
+      - /gateway/node_modules
+    restart: unless-stopped
