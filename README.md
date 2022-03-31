@@ -1,12 +1,16 @@
 # Microservices demo with nestJS
 
+This is a skeleton of a nestJS microservices architecture with two resource services and a gateway. 
+
+## Quick start
+
 Create file `.env` and copy the contents of `.env.example` in it. Then, run `docker-compose up` to start the services.
 
 ## Using the API
 
-Try the api by creating an item object and a bar object.
+The API gateway on `http://localhost:3000/` connects to two resource services, namely ´service a´ (in port 3001) and ´service b´ (in port 3002). Instructions on how to use the api below.
 
-## Create item
+### Service a
 
 Send a POST request to `http://localhost:3000/items` with the body
 
@@ -16,9 +20,11 @@ Send a POST request to `http://localhost:3000/items` with the body
 }
 ```
 
-You should get the stored item back as a response. Get the item by send a GET request to `http://localhost:3000/items/<id>`.
+You should get the stored item back as a response. 
 
-## Create bar
+You can view the stored items by send a GET request to `http://localhost:3000/items/<id>`.
+
+### Create bar
 
 Send a POST request to `http://localhost:3000/bars` with the body
 
@@ -28,4 +34,6 @@ Send a POST request to `http://localhost:3000/bars` with the body
 }
 ```
 
-You should get the stored bar object back as a response. Get the item by send a GET request to `http://localhost:3000/bars/<id>`.
+You should get the stored bar object back as a response. 
+
+You can get the saved "bar" objects by send a GET request to `http://localhost:3000/bars/<id>`.
