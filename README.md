@@ -24,7 +24,7 @@ You should get the stored item back as a response.
 
 You can view the stored items by sending a GET request to `http://localhost:3000/items/<id>`.
 
-### Create bar
+### Service b
 
 Send a POST request to `http://localhost:3000/bars` with the body
 
