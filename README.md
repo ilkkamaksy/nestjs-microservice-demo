@@ -1,4 +1,4 @@
-# Microservices demo with nest.js
+# Microservices demo with nestJS
 
 Create file `.env` and copy the contents of `.env.example` in it. Then, run `docker-compose up` to start the services.
 
