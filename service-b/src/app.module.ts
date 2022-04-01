@@ -1,5 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import {
+  POSTGRES_DB,
+  POSTGRES_HOST,
+  POSTGRES_PASSWORD,
+  POSTGRES_PORT,
+  POSTGRES_USER,
+} from 'config/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BarEntity } from './bar.entity';
@@ -9,11 +16,11 @@ import { BarRepository } from './bar.repository';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'dbb',
-      port: 5433,
-      username: 'postgres_user',
-      password: 'postgres_password',
-      database: 'bar',
+      host: POSTGRES_HOST,
+      port: POSTGRES_PORT,
+      username: POSTGRES_USER,
+      password: POSTGRES_PASSWORD,
+      database: POSTGRES_DB,
       synchronize: true,
       autoLoadEntities: true,
     }),
