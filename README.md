@@ -1,4 +1,4 @@
-# Microservices demo with nestJS
+# Microservices skeleton with nestJS
 
 This is a skeleton of a nestJS microservices architecture with two resource services and a gateway. 
 
